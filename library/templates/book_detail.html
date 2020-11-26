@@ -1,0 +1,78 @@
+{% extends "bootstrap_base.html" %}
+
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+
+{% block content %}
+{% if book.total_pages != None %}
+<span style="width: 50px;
+height: 50px;
+/* line-height: 40px; */
+border-radius: 100%;
+font-size: 25px;
+color: #fff;
+text-align: center;
+background: #000;
+padding: 5px;" class="circle" pagenum>{{book.total_pages}}</span>
+{% endif %}
+<div class="col-9">
+    <div class="starter-template">
+        <div class="title">
+            <div style="display: flex;">
+                <h1>{{book.title}}</h1> <span style="flex: 1">
+            </div>
+
+        </div>
+        <p>
+        <p>
+            {{ book.blurb }}
+        </p>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div>
+                        Rating:
+                        {% load library_extra %}
+                        {% autoescape off %}
+                        {% star_rating book.rating %}
+                        {% endautoescape %}
+                        {{book.rating}}
+                    </div>
+
+                </div>
+                <div class="col">
+                    <span>Published Date: {{book.published_date}}</span><br>
+
+                </div>
+                <div div class="col"><span>Author: {{book.author}}</span></div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span>ISBN: {{book.isbn}}</span>
+                </div>
+                <div class="col"><span>Publisher: {{book.publisher}}</span></div>
+                <div class="col"></div>
+            </div>
+        </div>
+
+        </p>
+    </div>
+</div>
+{% if book.genres.all  %}
+<div class="col-2">
+    <div class="row">
+        <h4>Genres</h4>
+    </div>
+    <div class="row">
+        {% for genre in book.genres.all %}
+        <span class="border" style="padding: 2px; margin: 2px; background-color: rgba(0, 0, 0, 20%); ">{{genre}}</span>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends "bootstrap_base.html" %}
+
+{% block title %}
+Series
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for series in object_list %}
+
+    <div class="card" style="margin: 5px; width: 49%">
+        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+        <div class="card-header">
+            <h5>{{ series }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for book in series.get_books %}
+            <li class="list-group-item">{{book}}</li>
+            {% endfor %}
+        </ul>
+        <div class="card-body">
+        </div>
+        <div class="card-footer">
+            <a href="{{ series.get_absolute_url }}" class="btn btn-primary" style="width: 100%;">Go to Series</a>
+        </div>
+    </div>
+    {% empty %}
+    No series yet
+    {% endfor %}
+</div>
+{% endblock %}

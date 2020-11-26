@@ -1,0 +1,69 @@
+{% extends "bootstrap_base.html" %}
+
+{% block title %}
+{{book.title}}
+{% endblock %}
+
+
+
+{% block content %}
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Create" />
+</form>
+<div id="post-{{book.pk}}" class="post-{{book.pk}} page type-page status-publish hentry">
+    <div class="post-content">
+        <div class="fusion-fullwidth fullwidth-box fusion-builder-row-2 nonhundred-percent-fullwidth non-hundred-percent-height-scrolling"
+            style="background-color: rgba(255,255,255,0);background-position: left top;background-repeat: no-repeat;padding-top:20px;padding-bottom:20px;border-top-width:0px;border-bottom-width:0px;border-color:#eae9e9;border-top-style:solid;border-bottom-style:solid;">
+            <div class="fusion-layout-column fusion_builder_column fusion_builder_column_3_4 fusion-builder-column-2 fusion-three-fourths fusion-column-first 3_4"
+                        style="margin-top:0px;margin-bottom:20px;">
+                        <style type="text/css"></style>
+                        <div class="fusion-title title fusion-title-1 sep-underline sep-solid fusion-title-text fusion-title-size-four fusion-border-below-title"
+                            style="border-bottom-color:#e0dede;margin-top:0px;margin-bottom:31px;">
+                            <h4 class="title-heading-left fusion-responsive-typography-calculated"
+                                style="margin: 0px; --fontSize:18; line-height: 1.33; --minFontSize:18;"
+                                data-fontsize="18" data-lineheight="23.9333px">{{book.title}}</h4>
+                        </div>
+            <div class="fusion-builder-row fusion-row ">
+                <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_1 fusion-builder-column-0 fusion-one-half fusion-column-first fusion-column-last 1_1"
+                    style="margin-top:0px;margin-bottom:20px;padding-right: 4%;">
+                    <div class="fusion-column-wrapper"
+                        style="padding: 0px; background-position: left top; background-repeat: no-repeat; background-size: cover; height: auto;"
+                        data-bg-url="">
+                        <div class="fusion-title title fusion-title-1 sep-underline sep-solid fusion-title-text fusion-title-size-four fusion-border-below-title"
+                            style="border-bottom-color:#e0dede;margin-top:0px;margin-bottom:31px;">
+                            <h4 class="title-heading-left fusion-responsive-typography-calculated"
+                                style="margin: 0px; --fontSize:18; line-height: 1.33; --minFontSize:18;"
+                                data-fontsize="18" data-lineheight="23.9333px">Blurb:</h4>
+                        </div>
+                        <div class="fusion-text">
+                            {{book.blurb}}
+                        </div>
+                        <div class="fusion-clearfix"></div>
+                    </div>
+                </div>
+                <div class="fusion-layout-column fusion_builder_column fusion_builder_column_1_4 fusion-builder-column-3 fusion-one-half fusion-column-last 1_1"
+                    style="margin-top:0px;margin-bottom:0px;">
+                    
+                        <div class="fusion-text">
+                            <p>Total Pages: {{book.total_pages}}<br>
+                                Rating: {{book.rating}}<br>
+                                ISBN: {{book.isbn}}<br>
+                                Published Date: {{book.published_date}}<br>
+                                Publisher: {{book.publisher}}<br>
+                                Author: {{book.author}}<br>
+                                Genres:
+                            <ul>
+                                {{ book.genres.all|join:", "}}
+
+                            </ul>
+                            </p>
+                        </div>
+                        <div class="fusion-clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends "bootstrap_base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="col">
+    <h1>Top 10 Books</h1>
+    <ul>
+        {% for top_book in top_books %}
+        <li>
+            <a href="{{top_book.get_absolute_url}}">
+                {{top_book}}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

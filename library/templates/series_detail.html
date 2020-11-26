@@ -1,0 +1,62 @@
+{% extends "bootstrap_base.html" %}
+
+{% block title %}
+{{series.name}}
+{% endblock %}
+
+{% block extra_content %}
+<style>
+    .my-main-container {
+        margin-left: 2em !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load django_component %}
+{% load mycomponents %}
+
+
+
+
+{% for book in series.books.all %}
+{% Card title="My card's title" %}
+    {% arg header %}
+    {{ book }}
+    {% endarg %}
+
+    {% arg body %}
+    <div style="margin-left: 2em; margin-bottom: 1rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <div>
+                    Rating:
+                    {% load library_extra %}
+                    {% autoescape off %}
+                    {% star_rating book.rating %}
+                    {% endautoescape %}
+                    {{book.rating}}
+                </div>
+            </li>
+            <li class="list-group-item">
+                <span>Author: {{book.author}}</span>
+            </li>
+            <li class="list-group-item">
+                <span>Publisher: {{book.publisher}}</span>
+            </li>
+            <li class="list-group-item">
+                <span>ISBN: {{book.isbn}}</span>
+            </li>
+        </ul>
+    </div>
+    {% endarg %}
+    {% arg footer_url %}
+    {{ book.get_absolute_url }}
+    {% endarg %}
+    {% arg footer_text %}
+    Go to Book
+    {% endarg %}
+{% /Card %}
+
+{% endfor %}
+{% endblock content %}
